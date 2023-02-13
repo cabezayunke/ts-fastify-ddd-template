@@ -1,11 +1,11 @@
-import { getMandatoryNumberEnvVar, getMandatoryStringEnvVar, getOptionalNumberEnvVar, getOptionalStringEnvVar } from "./config/utils";
-import { AuthenticatedRequest } from "./controller/AuthenticatedRequest";
-import { AuthHeadersSchema } from "./controller/AuthHeaders";
-import { ErrorResponseSchema } from "./controller/ErrorResponse";
-import { MongoConnectionManager } from "./data/MongoConnectionManager";
-import { Repository } from "./data/Repository";
-import { ApiError } from "./error/ApiError";
-import { AppParams, buildApp, start } from "./server/FastifyApp";
+import { Repository } from "./domain/data/Repository";
+import { AuthenticatedRequest } from "./infrastructure/controller/AuthenticatedRequest";
+import { AuthHeadersSchema } from "./infrastructure/controller/AuthHeadersSchema";
+import { ErrorResponseSchema } from "./infrastructure/controller/ErrorResponseSchema";
+import { MongoConnectionManager } from "./infrastructure/data/MongoConnectionManager";
+import { ApiError } from "./infrastructure/server/ApiError";
+import { getMandatoryNumberEnvVar, getMandatoryStringEnvVar, getOptionalNumberEnvVar, getOptionalStringEnvVar } from "./infrastructure/server/config";
+import { AppParams, buildApp, start } from "./infrastructure/server/FastifyApp";
 
 export {
     ApiError,
@@ -21,4 +21,4 @@ export {
     start as startFastifyApp,
     AppParams as FastifyAppParams,
     MongoConnectionManager
-}
+};

@@ -32,13 +32,17 @@
     "json-schema-to-ts": "^2.5.3",
     "mongoose": "^6.4.2",
     "mongoose-lean-virtuals": "^0.9.1",
-    "reflect-metadata": "^0.1.13"
+    "reflect-metadata": "^0.1.13",
+    "uuid": "^9.0.0",
+    "uuid-validate": "^0.0.3"
   },
   "devDependencies": {
     "@faker-js/faker": "^7.3.0",
     "@fastify/swagger": "^7.4.1",
     "@types/jest": "^28.1.4",
     "@types/node": "^18.0.0",
+    "@types/uuid": "^9.0.0",
+    "@types/uuid-validate": "^0.0.1",
     "@typescript-eslint/eslint-plugin": "^5.30.3",
     "@typescript-eslint/parser": "^5.30.3",
     "eslint": "^8.19.0",

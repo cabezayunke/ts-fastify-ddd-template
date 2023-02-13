@@ -11,7 +11,7 @@
     "outDir": "./dist",
     "baseUrl": "./src",
     "typeRoots": ["./node_modules/@types"],
-    "types": ["node","jest"],
+    "types": ["node", "jest"],
     "moduleResolution": "node",
     "incremental": true,
     "declarationMap": true,
@@ -31,7 +31,7 @@
     "allowJs": true
   },
   "include": [
-    "src/**/*",
+    "src/**/*"
   ],
   "exclude": [
     "node_modules/**/*",
