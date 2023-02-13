@@ -1,6 +1,6 @@
 import { EventEmitter } from 'events';
-import { DomainEventSubscriber } from '../../domain/DomainEventSubscriber';
-import { DomainEvent } from '../../domain/events/DomainEvent';
+import { DomainEventSubscriber } from 'shared/domain/events/DomainEventSubscriber';
+import { DomainEvent, DomainEventClass } from '../../domain/events/DomainEvent';
 
 export class EventEmitterBus extends EventEmitter {
   constructor(subscribers: Array<DomainEventSubscriber<DomainEvent>>) {
@@ -9,15 +9,15 @@ export class EventEmitterBus extends EventEmitter {
     this.registerSubscribers(subscribers);
   }
 
-  registerSubscribers(subscribers?: DomainEventSubscriber<DomainEvent>[]) {
+  registerSubscribers(subscribers?: DomainEventSubscriber<DomainEvent>[]): void {
     subscribers?.map(subscriber => {
       this.registerSubscriber(subscriber);
     });
   }
 
-  private registerSubscriber(subscriber: DomainEventSubscriber<DomainEvent>) {
-    subscriber.subscribedTo().map(event => {
-      this.on(event.EVENT_NAME, subscriber.on.bind(subscriber));
+  private registerSubscriber(subscriber: DomainEventSubscriber<DomainEvent>): void {
+    subscriber.subscribedTo().map((event: DomainEventClass) => {
+      this.on(event.eventName, subscriber.on.bind(subscriber));
     });
   }
 

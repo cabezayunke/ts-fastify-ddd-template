@@ -4,7 +4,7 @@ import { InvalidArgumentError } from '../errors/InvalidArgumentError';
 import { StringValueObject } from './StringValueObject';
 
 export class Uuid extends StringValueObject {
-  private constructor(value: string) {
+  constructor(value: string) {
     super(value);
     if (!uuidValidate(value, 4)) {
       throw new InvalidArgumentError(

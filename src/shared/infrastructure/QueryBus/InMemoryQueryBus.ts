@@ -1,6 +1,6 @@
+import { QueryBus } from 'shared/domain/queries/QueryBus';
 import { Query } from '../../domain/queries/Query';
 import { Response } from '../../domain/Response';
-import { QueryBus } from './../../domain/QueryBus';
 import { QueryHandlersInformation } from './QueryHandlersInformation';
 
 export class InMemoryQueryBus implements QueryBus {

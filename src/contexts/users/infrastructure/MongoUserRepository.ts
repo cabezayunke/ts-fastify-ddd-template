@@ -1,30 +1,37 @@
 import { Service } from 'diod';
+import { User } from '../domain/User';
 import { UserRepository } from '../domain/UserRepository';
-import { User, UserDto } from './UserModel';
+import { MongoUserRepositoryMapper } from './MongoUserRepositoryMapper';
+import { User as UserModel } from './UserModel';
 
 @Service()
 export class MongoUserRepository extends UserRepository {
-  async find(criteria: Record<string, unknown>): Promise<UserDto[]> {
+  mapper: MongoUserRepositoryMapper;
+
+  constructor() {
+    super();
+    this.mapper = new MongoUserRepositoryMapper();
+  }
+
+  async find(criteria: Record<string, unknown>): Promise<User | User[]> {
     const { id, ...rest } = criteria;
     if (id) {
-      return User.findById(id).lean({ virtuals: true });
+      const result = await UserModel.findById(id).lean({ virtuals: true });
+      return this.mapper.toDomain(result as Record<string, unknown>);
     }
-    return User.find(rest).lean({ virtuals: true });
+    const results = await UserModel.find(rest).lean({ virtuals: true });
+    return results.map(this.mapper.toDomain);
   }
 
-  async remove(key: string): Promise<string> {
-    await User.remove({ _id: key });
-    return key;
+  async remove(user: User): Promise<void> {
+    await UserModel.remove({ _id: user.id });
   }
 
-  async save(data: UserDto): Promise<string> {
+  async save(data: User): Promise<void> {
     if (data.id) {
-      await User.updateOne(data);
-      return data.id;
-    } else;
-    {
-      const user = await User.create(data);
-      return user._id.toString();
+      await UserModel.updateOne(this.mapper.fromDomain(data));
+    } else {
+      await UserModel.create(this.mapper.fromDomain(data));
     }
   }
 }

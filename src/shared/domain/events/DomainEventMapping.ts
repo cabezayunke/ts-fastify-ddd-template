@@ -27,7 +27,7 @@ export class DomainEventMapping {
     };
   }
 
-  for(name: string) {
+  for(name: string): DomainEventClass | undefined {
     const domainEvent = this.mapping.get(name);
 
     if (!domainEvent) {

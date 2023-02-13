@@ -1,8 +1,8 @@
 import { Uuid } from '../value-object/Uuid';
 
 export abstract class DomainEvent {
-  static EVENT_NAME: string;
-  static fromPrimitives: (...args: any[]) => any;
+  static fromPrimitives: (...args: unknown[]) => unknown;
+
   readonly aggregateId: string;
   readonly eventId: string;
   readonly occurredOn: Date;
@@ -15,15 +15,15 @@ export abstract class DomainEvent {
     occurredOn?: Date
   ) {
     this.aggregateId = aggregateId;
-    this.eventId = eventId || Uuid.random().value;
+    this.eventId = eventId || Uuid.random().value();
     this.occurredOn = occurredOn || new Date();
     this.eventName = eventName;
   }
 
-  abstract toPrimitive(): Object;
+  abstract toPrimitive(): unknown;
 }
 
 export type DomainEventClass = {
-  EVENT_NAME: string;
-  fromPrimitives(...args: any[]): DomainEvent;
+  readonly eventName: string;
+  fromPrimitives(...args: unknown[]): DomainEvent;
 };

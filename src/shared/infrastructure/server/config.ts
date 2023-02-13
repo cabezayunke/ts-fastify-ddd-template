@@ -2,7 +2,7 @@ import { ApiError } from './ApiError';
 
 const getOptionalNumberEnvVar = (envVarName: string, defaultValue: number): number => {
   const value = process.env[envVarName];
-  if (value && !isNaN(Number(value))) {
+  if (value && !Number.isNaN(Number(value))) {
     return parseInt(value, 10);
   }
   return defaultValue;

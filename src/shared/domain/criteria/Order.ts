@@ -3,6 +3,7 @@ import { OrderType, OrderTypes } from './OrderType';
 
 export class Order {
   readonly orderBy: OrderBy;
+
   readonly orderType: OrderType;
 
   constructor(orderBy: OrderBy, orderType: OrderType) {

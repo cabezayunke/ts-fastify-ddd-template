@@ -1,7 +1,9 @@
 import HttpStatus from 'http-status-codes';
+import { DomainError } from 'shared/domain/errors/DomainError';
 
 export class ApiError extends Error {
   public statusCode: number;
+
   public extra: Record<string, unknown>;
 
   constructor(
@@ -14,27 +16,31 @@ export class ApiError extends Error {
     this.extra = extra || {};
   }
 
-  static badRequest(message: string, extra?: Record<string, unknown>) {
+  static badRequest(message: string, extra?: Record<string, unknown>): ApiError {
     return new ApiError(message, HttpStatus.BAD_REQUEST, extra);
   }
 
-  static notFound(message: string, extra?: Record<string, unknown>) {
+  static notFound(message: string, extra?: Record<string, unknown>): ApiError {
     return new ApiError(message, HttpStatus.NOT_FOUND, extra);
   }
 
-  static conflict(message: string, extra?: Record<string, unknown>) {
+  static conflict(message: string, extra?: Record<string, unknown>): ApiError {
     return new ApiError(message, HttpStatus.CONFLICT, extra);
   }
 
-  static unauthorized(message: string, extra?: Record<string, unknown>) {
+  static unauthorized(message: string, extra?: Record<string, unknown>): ApiError {
     return new ApiError(message, HttpStatus.UNAUTHORIZED, extra);
   }
 
-  static forbidden(message: string, extra?: Record<string, unknown>) {
+  static forbidden(message: string, extra?: Record<string, unknown>): ApiError {
     return new ApiError(message, HttpStatus.FORBIDDEN, extra);
   }
 
-  static internal(message: string, extra?: Record<string, unknown>) {
+  static internal(message: string, extra?: Record<string, unknown>): ApiError {
     return new ApiError(message, HttpStatus.INTERNAL_SERVER_ERROR, extra);
+  }
+
+  static fromDomainError(error: DomainError): ApiError {
+    return new ApiError(error.message, HttpStatus.BAD_REQUEST);
   }
 }

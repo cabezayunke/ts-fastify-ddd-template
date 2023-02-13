@@ -1,5 +1,5 @@
-import fastify, { FastifyInstance, FastifyServerOptions } from 'fastify';
 import fastifySwagger from '@fastify/swagger';
+import fastify, { FastifyInstance, FastifyServerOptions } from 'fastify';
 import { handleError } from './FastifyErrorHandler';
 
 export interface AppParams extends FastifyServerOptions {
@@ -43,8 +43,13 @@ export const buildApp = (opts: AppParams = {}): FastifyInstance => {
 /**
  * Run the server!
  */
-export const start = async (app: FastifyInstance, port: number, host: string) => {
+export const start = async (
+  app: FastifyInstance,
+  port: number,
+  host: string
+): Promise<string | undefined> => {
   try {
+    // eslint-disable-next-line no-console
     console.log(`Server running on ${host}:${port}`, { tags: 'init,server' });
     const server = await app.listen({ port, host });
     return server;

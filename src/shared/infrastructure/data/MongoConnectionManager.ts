@@ -21,7 +21,7 @@ export class MongoConnectionManager implements ConnectionManager {
             );
         });
         db.on("error", error => {
-            console.error("Error in MongoDb connection: " + error.toString(), { ...tags, error });
+            console.error(`Error in MongoDb connection: ${  error.toString()}`, { ...tags, error });
         });
         db.on("connected", () => {
             console.log("MongoDB connected!", tags);

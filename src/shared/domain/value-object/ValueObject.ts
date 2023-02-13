@@ -13,7 +13,7 @@ export abstract class ValueObject<T> {
     return this.value() === o.value();
   }
 
-  toString() {
+  toString(): string | undefined {
     if (this._value !== undefined && this._value !== null) {
       return this._value.toString();
     }

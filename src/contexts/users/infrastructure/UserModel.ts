@@ -9,7 +9,7 @@ export interface UserDto extends UserParams {
   id: string;
 }
 
-export interface UserModel extends Model<UserDocument> {}
+export type UserModel = Model<UserDocument>;
 export interface UserDocument extends Document {
   name: string;
   email: string;

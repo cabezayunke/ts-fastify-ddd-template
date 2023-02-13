@@ -3,8 +3,11 @@ import { Order } from './Order';
 
 export class Criteria {
   readonly filters: Filters;
+
   readonly order: Order;
+
   readonly limit?: number;
+
   readonly offset?: number;
 
   constructor(filters: Filters, order: Order, limit?: number, offset?: number) {

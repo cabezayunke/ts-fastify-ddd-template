@@ -1,14 +1,16 @@
 import { Repository } from '../../../shared';
-import { UserDto } from '../infrastructure/UserModel';
+import { User } from './User';
 
-export abstract class UserRepository implements Repository<UserDto> {
-  find(_: Record<string, unknown>): Promise<UserDto[]> {
+export abstract class UserRepository implements Repository<User> {
+  find(data: Record<string, unknown>): Promise<User | User[]> {
     throw new Error('Method not implemented.');
   }
-  remove(_: string): Promise<string> {
+
+  remove(user: User): Promise<void> {
     throw new Error('Method not implemented.');
   }
-  save(_: UserDto): Promise<string> {
+
+  save(user: User): Promise<void> {
     throw new Error('Method not implemented.');
   }
 }

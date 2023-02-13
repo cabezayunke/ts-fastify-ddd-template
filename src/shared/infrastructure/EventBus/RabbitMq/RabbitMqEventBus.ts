@@ -9,10 +9,15 @@ import RabbitMqConfig from './RabbitMqConfig';
 
 export default class RabbitMqEventbus implements EventBus {
   private connection: Connection;
+
   private exchange: Exchange;
+
   private queue: Queue;
+
   private logger: Logger;
+
   private deserializer?: DomainEventJsonDeserializer;
+
   private subscribers: Map<string, Array<DomainEventSubscriber<DomainEvent>>>;
 
   constructor(config: RabbitMqConfig, logger: Logger) {

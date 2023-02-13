@@ -1,9 +1,10 @@
-import winston, { Logger as WinstonLoggerType } from 'winston';
-import Logger from '../domain/Logger';
+import Logger from 'shared/domain/Logger';
+import { createLogger, format, Logger as WinstonLoggerType, transports } from 'winston';
 
 enum Levels {
   DEBUG = 'debug',
   ERROR = 'error',
+  WARN = 'warn',
   INFO = 'info'
 }
 
@@ -11,42 +12,51 @@ class WinstonLogger implements Logger {
   private logger: WinstonLoggerType;
 
   constructor() {
-    this.logger = winston.createLogger({
-      format: winston.format.combine(
-        winston.format.prettyPrint(),
-        winston.format.errors({ stack: true }),
-        winston.format.splat(),
-        winston.format.colorize(),
-        winston.format.simple()
+    this.logger = createLogger({
+      format: format.combine(
+        format.prettyPrint(),
+        format.errors({ stack: true }),
+        format.splat(),
+        format.colorize(),
+        format.simple()
       ),
       transports: [
-        new winston.transports.Console(),
-        new winston.transports.File({
+        new transports.Console(),
+        new transports.File({
           filename: `logs/${Levels.DEBUG}.log`,
           level: Levels.DEBUG
         }),
-        new winston.transports.File({
+        new transports.File({
           filename: `logs/${Levels.ERROR}.log`,
           level: Levels.ERROR
         }),
-        new winston.transports.File({
+        new transports.File({
           filename: `logs/${Levels.INFO}.log`,
           level: Levels.INFO
+        }),
+        new transports.File({
+          filename: `logs/${Levels.WARN}.log`,
+          level: Levels.WARN
         })
       ]
     });
   }
 
-  debug(message: string) {
-    this.logger.debug(message);
+  warn(message: string, extra?: unknown): void {
+    this.logger.warn(message, extra);
   }
 
-  error(message: string | Error) {
+  debug(message: string, extra?: unknown): void {
+    this.logger.debug(message, extra);
+  }
+
+  error(message: string | Error, extra?: unknown): void {
     this.logger.error(message);
+    this.logger.error(extra);
   }
 
-  info(message: string) {
-    this.logger.info(message);
+  info(message: string, extra?: unknown): void {
+    this.logger.info(message, extra);
   }
 }
 export default WinstonLogger;

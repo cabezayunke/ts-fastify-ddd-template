@@ -1,6 +1,6 @@
 import { UserDto, UserRepository } from '../infrastructure';
 
-export interface CreateUserInput extends UserDto {}
+export type CreateUserInput = UserDto;
 
 export class CreateUserUseCase {
   constructor(private readonly userRepository: UserRepository) {}

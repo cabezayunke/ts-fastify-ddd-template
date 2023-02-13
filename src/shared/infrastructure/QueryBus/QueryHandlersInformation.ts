@@ -1,6 +1,6 @@
+import { QueryNotRegisteredError } from 'shared/domain/errors/QueryNotRegisteredError';
+import { QueryHandler } from 'shared/domain/queries/QueryHandler';
 import { Query } from '../../domain/queries/Query';
-import { QueryHandler } from '../../domain/QueryHandler';
-import { QueryNotRegisteredError } from '../../domain/QueryNotRegisteredError';
 import { Response } from '../../domain/Response';
 
 export class QueryHandlersInformation {

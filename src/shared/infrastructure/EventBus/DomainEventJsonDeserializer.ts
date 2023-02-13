@@ -1,3 +1,4 @@
+import { DomainEvent } from 'shared/domain/events/DomainEvent';
 import { DomainEventMapping } from '../../domain/events/DomainEventMapping';
 
 export class DomainEventJsonDeserializer {
@@ -7,7 +8,7 @@ export class DomainEventJsonDeserializer {
     this.mapping = mapping;
   }
 
-  deserialize(event: string) {
+  deserialize(event: string): DomainEvent | undefined {
     const eventData = JSON.parse(event).data;
     const eventName = eventData.type;
     const eventClass = this.mapping.for(eventName);
