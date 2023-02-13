@@ -9,7 +9,9 @@ export class CommandHandlersInformation {
     this.commandHandlersMap = this.formatHandlers(commandHandlers);
   }
 
-  private formatHandlers(commandHandlers: Array<CommandHandler<Command>>): Map<Command, CommandHandler<Command>> {
+  private formatHandlers(
+    commandHandlers: Array<CommandHandler<Command>>
+  ): Map<Command, CommandHandler<Command>> {
     const handlersMap = new Map();
 
     commandHandlers.forEach(commandHandler => {

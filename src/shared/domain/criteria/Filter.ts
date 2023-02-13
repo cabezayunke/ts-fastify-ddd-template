@@ -23,6 +23,10 @@ export class Filter {
       throw new InvalidArgumentError(`The filter is invalid`);
     }
 
-    return new Filter(new FilterField(field), FilterOperator.fromValue(operator), new FilterValue(value));
+    return new Filter(
+      new FilterField(field),
+      FilterOperator.fromValue(operator),
+      new FilterValue(value)
+    );
   }
 }

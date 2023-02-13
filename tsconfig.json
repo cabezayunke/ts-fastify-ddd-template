@@ -30,13 +30,6 @@
     "noUnusedParameters": true, // Report errors on unused parameters in functions
     "allowJs": true
   },
-  "include": [
-    "src/**/*"
-  ],
-  "exclude": [
-    "node_modules/**/*",
-    ".vscode/**/*",
-    "**/*.spec.ts",
-    "**/*.test.ts"
-  ]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules/**/*", ".vscode/**/*", "**/*.spec.ts", "**/*.test.ts"]
 }

@@ -1,17 +1,20 @@
-import { FastifyInstance } from "fastify";
+import { FastifyInstance } from 'fastify';
 import { FromSchema } from 'json-schema-to-ts';
 import { GetUserUseCase } from '../../../contexts/users/application/GetUserUseCase';
-import { AuthenticatedRequest, AuthHeadersSchema, ErrorResponseSchema } from "../../../shared";
+import {
+  AuthenticatedRequest,
+  AuthHeadersSchema,
+  ErrorResponseSchema
+} from '../../../shared';
 import { container } from '../routes';
-import { UserResponseSchema, UserResponseType } from "./UserResponse";
+import { UserResponseSchema, UserResponseType } from './UserResponse';
 
-
-export const GetUserParams =  {
-    type: "object",
-    properties: {
-      userId: { type: "string" },
-    },
-    required: ["userId"],
+export const GetUserParams = {
+  type: 'object',
+  properties: {
+    userId: { type: 'string' }
+  },
+  required: ['userId']
 } as const;
 
 interface GetUserRequest extends AuthenticatedRequest {
@@ -20,7 +23,7 @@ interface GetUserRequest extends AuthenticatedRequest {
 
 export default async (app: FastifyInstance): Promise<void> => {
   app.get<GetUserRequest>(
-    "/:userId",
+    '/:userId',
     {
       schema: {
         description: 'Get user by ID',
@@ -30,9 +33,9 @@ export default async (app: FastifyInstance): Promise<void> => {
         headers: AuthHeadersSchema,
         response: {
           200: UserResponseSchema,
-          "4xx": ErrorResponseSchema,
-        },
-      },
+          '4xx': ErrorResponseSchema
+        }
+      }
     },
     async (request, response) => {
       const { userId } = request.params;
@@ -40,4 +43,4 @@ export default async (app: FastifyInstance): Promise<void> => {
       response.status(200).send(data as UserResponseType);
     }
   );
-}
+};

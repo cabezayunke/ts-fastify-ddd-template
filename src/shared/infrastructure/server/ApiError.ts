@@ -1,10 +1,14 @@
 import HttpStatus from 'http-status-codes';
 
 export class ApiError extends Error {
-	public statusCode: number;
-	public extra: Record<string, unknown>;
+  public statusCode: number;
+  public extra: Record<string, unknown>;
 
-  constructor(message: string, statusCode = HttpStatus.BAD_REQUEST, extra?: Record<string, unknown>) {
+  constructor(
+    message: string,
+    statusCode = HttpStatus.BAD_REQUEST,
+    extra?: Record<string, unknown>
+  ) {
     super(message);
     this.statusCode = statusCode;
     this.extra = extra || {};

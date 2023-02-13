@@ -8,7 +8,12 @@ export abstract class DomainEvent {
   readonly occurredOn: Date;
   readonly eventName: string;
 
-  constructor(eventName: string, aggregateId: string, eventId?: string, occurredOn?: Date) {
+  constructor(
+    eventName: string,
+    aggregateId: string,
+    eventId?: string,
+    occurredOn?: Date
+  ) {
     this.aggregateId = aggregateId;
     this.eventId = eventId || Uuid.random().value;
     this.occurredOn = occurredOn || new Date();
@@ -18,4 +23,7 @@ export abstract class DomainEvent {
   abstract toPrimitive(): Object;
 }
 
-export type DomainEventClass = { EVENT_NAME: string, fromPrimitives(...args: any[]): DomainEvent; };
+export type DomainEventClass = {
+  EVENT_NAME: string;
+  fromPrimitives(...args: any[]): DomainEvent;
+};

@@ -17,15 +17,21 @@ export default class RabbitMqEventbus implements EventBus {
 
   constructor(config: RabbitMqConfig, logger: Logger) {
     this.logger = logger;
-    this.connection = new Connection(`amqp://${config.user}:${config.password}@${config.host}`);
-    this.exchange = this.connection.declareExchange(config.exchange, 'fanout', { durable: false });
+    this.connection = new Connection(
+      `amqp://${config.user}:${config.password}@${config.host}`
+    );
+    this.exchange = this.connection.declareExchange(config.exchange, 'fanout', {
+      durable: false
+    });
     this.queue = this.connection.declareQueue(config.queue);
     this.subscribers = new Map();
   }
 
   async start(): Promise<void> {
     if (!this.deserializer) {
-      throw new Error('RabbitMqEventBus has not being properly initialized, deserializer is missing');
+      throw new Error(
+        'RabbitMqEventBus has not being properly initialized, deserializer is missing'
+      );
     }
 
     await this.queue.bind(this.exchange);
@@ -35,9 +41,15 @@ export default class RabbitMqEventbus implements EventBus {
         if (event) {
           const subscribers = this.subscribers.get(event.eventName);
           if (subscribers && subscribers.length) {
-            const subscribersNames = subscribers.map(subscriber => subscriber.constructor.name);
-            this.logger.info(`[RabbitMqEventBus] Message processed: ${event.eventName} by ${subscribersNames}`);
-            const subscribersExecutions = subscribers.map(subscriber => subscriber.on(event));
+            const subscribersNames = subscribers.map(
+              subscriber => subscriber.constructor.name
+            );
+            this.logger.info(
+              `[RabbitMqEventBus] Message processed: ${event.eventName} by ${subscribersNames}`
+            );
+            const subscribersExecutions = subscribers.map(subscriber =>
+              subscriber.on(event)
+            );
             await Promise.all(subscribersExecutions);
           }
         }

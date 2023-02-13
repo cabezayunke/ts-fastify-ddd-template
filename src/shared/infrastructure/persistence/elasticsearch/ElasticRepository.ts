@@ -30,13 +30,19 @@ export abstract class ElasticRepository<T extends AggregateRoot> {
     return this.searchInElasticWithBuilder(unserializer, body);
   }
 
-  protected async searchByCriteria(criteria: Criteria, unserializer: (data: any) => T): Promise<T[]> {
+  protected async searchByCriteria(
+    criteria: Criteria,
+    unserializer: (data: any) => T
+  ): Promise<T[]> {
     const body = this.criteriaConverter.convert(criteria);
 
     return this.searchInElasticWithBuilder(unserializer, body);
   }
 
-  private async searchInElasticWithBuilder(unserializer: (data: any) => T, body: Bodybuilder): Promise<T[]> {
+  private async searchInElasticWithBuilder(
+    unserializer: (data: any) => T,
+    body: Bodybuilder
+  ): Promise<T[]> {
     const client = await this.client();
 
     try {
@@ -55,13 +61,21 @@ export abstract class ElasticRepository<T extends AggregateRoot> {
   }
 
   private isNotFoundError(e: any) {
-    return e instanceof ResponseError && (e as ResponseError).meta.statusCode === httpStatus.NOT_FOUND;
+    return (
+      e instanceof ResponseError &&
+      (e as ResponseError).meta.statusCode === httpStatus.NOT_FOUND
+    );
   }
 
   protected async persist(id: string, aggregateRoot: T): Promise<void> {
     const client = await this.client();
     const document = { ...aggregateRoot.toPrimitives() };
 
-    await client.index({ index: this.indexName(), id, body: document, refresh: 'wait_for' }); // wait_for wait for a refresh to make this operation visible to search
+    await client.index({
+      index: this.indexName(),
+      id,
+      body: document,
+      refresh: 'wait_for'
+    }); // wait_for wait for a refresh to make this operation visible to search
   }
 }

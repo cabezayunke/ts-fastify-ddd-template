@@ -5,7 +5,10 @@ import MongoConfig from './MongoConfig';
 export class MongoClientFactory {
   private static clients: { [key: string]: MongoClient } = {};
 
-  static async createClient(contextName: string, config: MongoConfig): Promise<MongoClient> {
+  static async createClient(
+    contextName: string,
+    config: MongoConfig
+  ): Promise<MongoClient> {
     let client = MongoClientFactory.getClient(contextName);
 
     if (!client) {
@@ -22,7 +25,10 @@ export class MongoClientFactory {
   }
 
   private static async createAndConnectClient(config: MongoConfig): Promise<MongoClient> {
-    const client = new MongoClient(config.url, { useUnifiedTopology: true, ignoreUndefined: true });
+    const client = new MongoClient(config.url, {
+      useUnifiedTopology: true,
+      ignoreUndefined: true
+    });
 
     await client.connect();
 

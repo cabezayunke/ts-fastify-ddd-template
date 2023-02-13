@@ -7,7 +7,10 @@ export class DomainEventMapping {
   private mapping: Mapping;
 
   constructor(mapping: DomainEventSubscriber<DomainEvent>[]) {
-    this.mapping = mapping.reduce(this.eventsExtractor(), new Map<string, DomainEventClass>());
+    this.mapping = mapping.reduce(
+      this.eventsExtractor(),
+      new Map<string, DomainEventClass>()
+    );
   }
 
   private eventsExtractor() {

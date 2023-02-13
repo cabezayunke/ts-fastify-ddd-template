@@ -15,7 +15,10 @@ export class Order {
       return Order.none();
     }
 
-    return new Order(new OrderBy(orderBy), OrderType.fromValue(orderType || OrderTypes.ASC));
+    return new Order(
+      new OrderBy(orderBy),
+      OrderType.fromValue(orderType || OrderTypes.ASC)
+    );
   }
 
   static none(): Order {

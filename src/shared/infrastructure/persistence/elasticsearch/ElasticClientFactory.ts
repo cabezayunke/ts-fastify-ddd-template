@@ -5,7 +5,10 @@ import ElasticConfig from './ElasticConfig';
 export class ElasticClientFactory {
   private static clients: { [key: string]: ElasticClient } = {};
 
-  static async createClient(contextName: string, config: ElasticConfig): Promise<ElasticClient> {
+  static async createClient(
+    contextName: string,
+    config: ElasticConfig
+  ): Promise<ElasticClient> {
     let client = ElasticClientFactory.getClient(contextName);
 
     if (!client) {
@@ -23,7 +26,9 @@ export class ElasticClientFactory {
     return ElasticClientFactory.clients[contextName];
   }
 
-  private static async createAndConnectClient(config: ElasticConfig): Promise<ElasticClient> {
+  private static async createAndConnectClient(
+    config: ElasticConfig
+  ): Promise<ElasticClient> {
     const client = new ElasticClient({ node: config.url });
 
     return client;
@@ -33,7 +38,10 @@ export class ElasticClientFactory {
     ElasticClientFactory.clients[contextName] = client;
   }
 
-  private static async createIndexWithSettingsIfNotExists(client: ElasticClient, config: ElasticConfig): Promise<void> {
+  private static async createIndexWithSettingsIfNotExists(
+    client: ElasticClient,
+    config: ElasticConfig
+  ): Promise<void> {
     const { body: exist } = await client.indices.exists({ index: config.indexName });
 
     if (!exist) {

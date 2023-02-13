@@ -73,18 +73,34 @@ export class ElasticCriteriaConverter {
   }
 
   private termsQuery(filter: Filter): QueryObject {
-    return { type: TypeQueryEnum.TERMS, field: filter.field.value, value: [filter.value.value] };
+    return {
+      type: TypeQueryEnum.TERMS,
+      field: filter.field.value,
+      value: [filter.value.value]
+    };
   }
 
   private greaterThanQuery(filter: Filter): QueryObject {
-    return { type: TypeQueryEnum.RANGE, field: filter.field.value, value: { gt: filter.value.value } };
+    return {
+      type: TypeQueryEnum.RANGE,
+      field: filter.field.value,
+      value: { gt: filter.value.value }
+    };
   }
 
   private lowerThanQuery(filter: Filter): QueryObject {
-    return { type: TypeQueryEnum.RANGE, field: filter.field.value, value: { lt: filter.value.value } };
+    return {
+      type: TypeQueryEnum.RANGE,
+      field: filter.field.value,
+      value: { lt: filter.value.value }
+    };
   }
 
   private wildcardQuery(filter: Filter): QueryObject {
-    return { type: TypeQueryEnum.WILDCARD, field: filter.field.value, value: `*${filter.value.value}*` };
+    return {
+      type: TypeQueryEnum.WILDCARD,
+      field: filter.field.value,
+      value: `*${filter.value.value}*`
+    };
   }
 }

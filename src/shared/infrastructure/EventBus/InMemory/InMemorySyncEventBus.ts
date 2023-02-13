@@ -22,7 +22,9 @@ export class InMemorySyncEventBus implements EventBus {
     events.map(event => {
       const subscribers = this.subscriptions.get(event.eventName);
       if (subscribers) {
-        return subscribers.map(subscriber => executions.push(subscriber.boundedCallback(event)));
+        return subscribers.map(subscriber =>
+          executions.push(subscriber.boundedCallback(event))
+        );
       }
     });
 
@@ -31,7 +33,9 @@ export class InMemorySyncEventBus implements EventBus {
 
   addSubscribers(subscribers: Array<DomainEventSubscriber<DomainEvent>>) {
     subscribers.map(subscriber =>
-      subscriber.subscribedTo().map(event => this.subscribe(event.EVENT_NAME!, subscriber))
+      subscriber
+        .subscribedTo()
+        .map(event => this.subscribe(event.EVENT_NAME!, subscriber))
     );
   }
 
@@ -39,7 +43,10 @@ export class InMemorySyncEventBus implements EventBus {
 
   private subscribe(topic: string, subscriber: DomainEventSubscriber<DomainEvent>): void {
     const currentSubscriptions = this.subscriptions.get(topic);
-    const subscription = { boundedCallback: subscriber.on.bind(subscriber), originalCallback: subscriber.on };
+    const subscription = {
+      boundedCallback: subscriber.on.bind(subscriber),
+      originalCallback: subscriber.on
+    };
     if (currentSubscriptions) {
       currentSubscriptions.push(subscription);
     } else {

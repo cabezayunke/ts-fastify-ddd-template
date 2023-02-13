@@ -1,6 +1,5 @@
-import { Service } from "diod";
-import { UserRepository } from "../infrastructure";
-
+import { Service } from 'diod';
+import { UserRepository } from '../infrastructure';
 
 export interface DeleteUserInput {
   userId: string;
@@ -8,11 +7,9 @@ export interface DeleteUserInput {
 
 @Service()
 export class GetUserUseCase {
-    constructor(
-        private readonly userRepository: UserRepository,
-      ) {}
-    
-      async execute({ userId }: DeleteUserInput): Promise<void> {
-        await this.userRepository.remove(userId);
-      }
+  constructor(private readonly userRepository: UserRepository) {}
+
+  async execute({ userId }: DeleteUserInput): Promise<void> {
+    await this.userRepository.remove(userId);
+  }
 }
