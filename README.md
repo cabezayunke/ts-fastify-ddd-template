@@ -1,2 +1,2 @@
-# typescript-fastify-api
-Fastify CRUD API example with Typescript
+# ts-fastofy-ddd-example
+Fastify DDD API example with Typescript
