@@ -6,11 +6,11 @@ import { UserRepository } from './UserRepository';
 export class UserFinder {
   constructor(private readonly userRepository: UserRepository) {}
 
-  find(userId: UserId): User {
-    const user = this.userRepository.find({ id: userId.value() });
+  async find(userId: UserId): Promise<User> {
+    const user = await this.userRepository.find({ id: userId.value() });
     if (!user) {
       throw new UserNotFound();
     }
-    return user;
+    return user as User;
   }
 }
