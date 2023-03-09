@@ -1,13 +1,17 @@
 import { Service } from 'diod';
-import { ApiError } from '../../shared';
-import { UserDto, UserRepository } from '../infrastructure';
+import { ApiError } from '../../../shared/infrastructure/server/ApiError';
+import { User } from '../domain/User';
+import { UserId } from '../domain/UserId';
+import { UserRepository } from '../domain/UserRepository';
 
 export interface GetUserInput {
   userId: string;
 }
 
-export interface GetUserOutput extends UserDto {
+export interface GetUserOutput {
   id: string;
+  name: string;
+  email: string;
 }
 
 @Service()
@@ -20,6 +24,12 @@ export class GetUserUseCase {
     if (!found || (isArrayResult && !found.length)) {
       throw ApiError.notFound('User not found', { userId });
     }
-    return isArrayResult ? (found[0] as GetUserOutput) : found;
+    const result = (isArrayResult ? found[0] : found) as User;
+
+    return {
+      id: (result?.id as UserId).value(),
+      name: result.name.value(),
+      email: result.email.value()
+    };
   }
 }

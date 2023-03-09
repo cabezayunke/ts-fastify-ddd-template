@@ -1,5 +1,5 @@
 import { Service } from 'diod';
-import { UserRepository } from '../infrastructure';
+import { UserRepository } from '../domain/UserRepository';
 
 export interface DeleteUserInput {
   userId: string;
@@ -10,6 +10,6 @@ export class GetUserUseCase {
   constructor(private readonly userRepository: UserRepository) {}
 
   async execute({ userId }: DeleteUserInput): Promise<void> {
-    await this.userRepository.remove(userId);
+    await this.userRepository.find({ id: userId });
   }
 }

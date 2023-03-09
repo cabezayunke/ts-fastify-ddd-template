@@ -2,7 +2,7 @@ import fastifySwagger from '@fastify/swagger';
 import fastify, { FastifyInstance, FastifyServerOptions } from 'fastify';
 import { handleError } from './FastifyErrorHandler';
 
-export interface AppParams extends FastifyServerOptions {
+export interface FastifyAppParams extends FastifyServerOptions {
   swagger?: {
     enabled: boolean;
     tags?: [{ name: string; description: string }];
@@ -10,7 +10,7 @@ export interface AppParams extends FastifyServerOptions {
   };
 }
 
-export const buildApp = (opts: AppParams = {}): FastifyInstance => {
+export const buildFastifyApp = (opts: FastifyAppParams = {}): FastifyInstance => {
   const { swagger, ...fastifyOpts } = opts;
   const app = fastify(fastifyOpts);
 
@@ -43,7 +43,7 @@ export const buildApp = (opts: AppParams = {}): FastifyInstance => {
 /**
  * Run the server!
  */
-export const start = async (
+export const startFastifyApp = async (
   app: FastifyInstance,
   port: number,
   host: string
@@ -54,7 +54,8 @@ export const start = async (
     const server = await app.listen({ port, host });
     return server;
   } catch (err) {
-    app.log.error(err);
+    // eslint-disable-next-line no-console
+    console.error(err.message);
     process.exit(1);
   }
 };

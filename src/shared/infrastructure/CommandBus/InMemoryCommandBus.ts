@@ -1,5 +1,5 @@
 import { Command } from '../../domain/commands/Command';
-import { CommandBus } from '../../domain/CommandBus';
+import { CommandBus } from '../../domain/commands/CommandBus';
 import { CommandHandlersInformation } from './CommandHandlersInformation';
 
 export class InMemoryCommandBus implements CommandBus {

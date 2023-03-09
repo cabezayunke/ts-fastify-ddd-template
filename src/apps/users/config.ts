@@ -4,7 +4,7 @@ import {
   getMandatoryStringEnvVar,
   getOptionalNumberEnvVar,
   getOptionalStringEnvVar
-} from '../../shared';
+} from 'shared/infrastructure/server/config';
 
 const envFile = `../.env.${getOptionalStringEnvVar('NODE_ENV', 'development')}`;
 dotenv.config({ path: `${__dirname}/${envFile}` });

@@ -22,7 +22,7 @@ export class DomainEventMapping {
 
   private eventNameExtractor(map: Mapping): (domainEvent: DomainEventClass) => void {
     return domainEvent => {
-      const eventName = domainEvent.EVENT_NAME;
+      const eventName = domainEvent.eventName;
       map.set(eventName, domainEvent);
     };
   }

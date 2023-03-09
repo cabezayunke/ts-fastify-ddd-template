@@ -1,11 +1,9 @@
 import { FastifyInstance } from 'fastify';
 import { FromSchema } from 'json-schema-to-ts';
+import { AuthenticatedRequest } from 'shared/infrastructure/controller/AuthenticatedRequest';
+import { AuthHeadersSchema } from 'shared/infrastructure/controller/AuthHeadersSchema';
+import { ErrorResponseSchema } from 'shared/infrastructure/controller/ErrorResponseSchema';
 import { GetUserUseCase } from '../../../contexts/users/application/GetUserUseCase';
-import {
-  AuthenticatedRequest,
-  AuthHeadersSchema,
-  ErrorResponseSchema
-} from '../../../shared';
 import { container } from '../routes';
 import { UserResponseSchema, UserResponseType } from './UserResponse';
 

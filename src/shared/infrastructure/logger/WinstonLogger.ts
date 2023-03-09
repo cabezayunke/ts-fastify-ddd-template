@@ -1,14 +1,14 @@
-import Logger from 'shared/domain/Logger';
+import { Logger } from 'shared/domain/Logger';
 import { createLogger, format, Logger as WinstonLoggerType, transports } from 'winston';
 
-enum Levels {
-  DEBUG = 'debug',
-  ERROR = 'error',
-  WARN = 'warn',
-  INFO = 'info'
-}
+// enum Levels {
+//   DEBUG = 'debug',
+//   ERROR = 'error',
+//   WARN = 'warn',
+//   INFO = 'info'
+// }
 
-class WinstonLogger implements Logger {
+export class WinstonLogger implements Logger {
   private logger: WinstonLoggerType;
 
   constructor() {
@@ -21,23 +21,23 @@ class WinstonLogger implements Logger {
         format.simple()
       ),
       transports: [
-        new transports.Console(),
-        new transports.File({
-          filename: `logs/${Levels.DEBUG}.log`,
-          level: Levels.DEBUG
-        }),
-        new transports.File({
-          filename: `logs/${Levels.ERROR}.log`,
-          level: Levels.ERROR
-        }),
-        new transports.File({
-          filename: `logs/${Levels.INFO}.log`,
-          level: Levels.INFO
-        }),
-        new transports.File({
-          filename: `logs/${Levels.WARN}.log`,
-          level: Levels.WARN
-        })
+        new transports.Console()
+        // new transports.File({
+        //   filename: `logs/${Levels.DEBUG}.log`,
+        //   level: Levels.DEBUG
+        // }),
+        // new transports.File({
+        //   filename: `logs/${Levels.ERROR}.log`,
+        //   level: Levels.ERROR
+        // }),
+        // new transports.File({
+        //   filename: `logs/${Levels.INFO}.log`,
+        //   level: Levels.INFO
+        // }),
+        // new transports.File({
+        //   filename: `logs/${Levels.WARN}.log`,
+        //   level: Levels.WARN
+        // })
       ]
     });
   }
@@ -59,4 +59,3 @@ class WinstonLogger implements Logger {
     this.logger.info(message, extra);
   }
 }
-export default WinstonLogger;

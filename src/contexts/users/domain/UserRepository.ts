@@ -1,16 +1,11 @@
-import { Repository } from '../../../shared';
+import { Repository } from '../../../shared/domain/data/Repository';
 import { User } from './User';
+import { UserId } from './UserId';
 
-export abstract class UserRepository implements Repository<User> {
-  find(data: Record<string, unknown>): Promise<User | User[]> {
-    throw new Error('Method not implemented.');
-  }
+export abstract class UserRepository implements Repository<UserId, User> {
+  abstract find(data: Record<string, unknown>): Promise<User | User[]>;
 
-  remove(user: User): Promise<void> {
-    throw new Error('Method not implemented.');
-  }
+  abstract remove(user: UserId): Promise<void>;
 
-  save(user: User): Promise<void> {
-    throw new Error('Method not implemented.');
-  }
+  abstract save(user: User): Promise<void>;
 }

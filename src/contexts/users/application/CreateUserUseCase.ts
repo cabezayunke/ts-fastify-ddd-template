@@ -1,11 +1,14 @@
-import { UserDto, UserRepository } from '../infrastructure';
+import { User } from '../domain/User';
+import { UserRepository } from '../domain/UserRepository';
 
-export type CreateUserInput = UserDto;
-
+export interface CreateUserInput {
+  name: string;
+  email: string;
+}
 export class CreateUserUseCase {
   constructor(private readonly userRepository: UserRepository) {}
 
-  async execute(userData: UserDto): Promise<void> {
-    await this.userRepository.save(userData);
+  async execute(userData: CreateUserInput): Promise<void> {
+    await this.userRepository.save(User.of(userData));
   }
 }

@@ -1,5 +1,6 @@
 import { Service } from 'diod';
 import { User } from '../domain/User';
+import { UserId } from '../domain/UserId';
 import { UserRepository } from '../domain/UserRepository';
 import { MongoUserRepositoryMapper } from './MongoUserRepositoryMapper';
 import { User as UserModel } from './UserModel';
@@ -23,8 +24,8 @@ export class MongoUserRepository extends UserRepository {
     return results.map(this.mapper.toDomain);
   }
 
-  async remove(user: User): Promise<void> {
-    await UserModel.remove({ _id: user.id });
+  async remove(id: UserId): Promise<void> {
+    await UserModel.remove({ _id: id.value() });
   }
 
   async save(data: User): Promise<void> {

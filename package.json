@@ -52,7 +52,7 @@
     "eslint-import-resolver-typescript": "^3.5.3",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-prettier": "^4.2.1",
-    "faker": "^6.6.6",
+    "faker": "^5.5.3",
     "jest": "^28.1.2",
     "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",

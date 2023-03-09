@@ -1,4 +1,4 @@
-import { MongoClient } from 'mongodb';
+import { MongoClient, MongoClientOptions } from 'mongodb';
 import { Nullable } from '../../../domain/Nullable';
 import MongoConfig from './MongoConfig';
 
@@ -28,7 +28,7 @@ export class MongoClientFactory {
     const client = new MongoClient(config.url, {
       useUnifiedTopology: true,
       ignoreUndefined: true
-    });
+    } as MongoClientOptions);
 
     await client.connect();
 

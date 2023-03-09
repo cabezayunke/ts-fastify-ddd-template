@@ -1,4 +1,4 @@
-export default interface Logger {
+export interface Logger {
   debug(message: string, extra?: unknown): void;
   info(message: string, extra?: unknown): void;
   warn(message: string, extra?: unknown): void;

@@ -1,5 +1,5 @@
-export interface Repository<T> {
-    find(criteria: Record<string, unknown>): Promise<T | T[]>;
-    remove(data: T): Promise<void>;
-    save(data: T): Promise<void>;
+export interface Repository<I, A> {
+    find(criteria: Record<string, unknown>): Promise<A | A[]>;
+    remove(id: I): Promise<void>;
+    save(data: A): Promise<void>;
 }

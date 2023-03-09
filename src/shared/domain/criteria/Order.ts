@@ -34,7 +34,7 @@ export class Order {
     return new Order(new OrderBy(orderBy), new OrderType(OrderTypes.ASC));
   }
 
-  public hasOrder() {
+  public hasOrder(): boolean {
     return !this.orderType.isNone();
   }
 }
