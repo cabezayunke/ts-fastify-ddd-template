@@ -18,6 +18,6 @@ export abstract class AggregateRoot {
     this.domainEvents.push(event);
   }
 
-  abstract toPrimitives(): Record<string, unknown>;
-  abstract fromPrimitives(data: Record<string, unknown>): this;
+  abstract toPrimitives<T>(): T | Record<string, unknown>;
+  static create: (...args: unknown[]) => unknown;
 }

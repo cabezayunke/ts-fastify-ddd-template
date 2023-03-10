@@ -1,6 +1,6 @@
 import { Repository } from '../../../shared/domain/data/Repository';
 import { User } from './User';
-import { UserId } from './UserId';
+import { UserId } from './value-object/UserId';
 
 export abstract class UserRepository implements Repository<UserId, User> {
   abstract find(data: Record<string, unknown>): Promise<User | User[]>;

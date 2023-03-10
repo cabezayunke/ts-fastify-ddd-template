@@ -1,7 +1,8 @@
 import { AggregateRoot } from 'shared/domain/AggregateRoot';
-import { UserEmail } from './UserEmail';
-import { UserId } from './UserId';
-import { UserName } from './UserName';
+import { UserCreatedDomainEvent } from './event/UserCreatedDomainEvent';
+import { UserEmail } from './value-object/UserEmail';
+import { UserId } from './value-object/UserId';
+import { UserName } from './value-object/UserName';
 
 export interface UserParams {
   id?: string;
@@ -18,11 +19,6 @@ export class User extends AggregateRoot {
     super();
   }
 
-  static create(name: UserName, email: UserEmail, id?: UserId): User {
-    const user = new this(name, email, id);
-    // user.recordEvent(new CreateUserEvent({}));
-  }
-
   get id(): UserId | undefined {
     return this?._id;
   }
@@ -33,15 +29,25 @@ export class User extends AggregateRoot {
     return this._email;
   }
 
-  toPrimitives(): Record<string, unknown> {
+  toPrimitives<UserParams>(): UserParams {
     return {
       id: this._id?.value(),
       name: this.name.value(),
       email: this.email.value()
-    };
+    } as UserParams;
   }
 
-  fromPrimitives(data: Record<string, unknown>): User {
-    return new User(data.name, data.email, data.id);
+  static create(data: UserParams): User {
+    const user = new User(
+      UserName.of(data.name),
+      UserEmail.of(data.email),
+      data.id ? UserId.of(data.id) : undefined
+    );
+
+    user.recordEvent(
+      UserCreatedDomainEvent.create(data.id as string, { userEmail: data.email })
+    );
+
+    return user;
   }
 }

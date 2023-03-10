@@ -1,5 +1,5 @@
-import { InvalidArgumentError } from 'shared/domain/errors/InvalidArgumentError';
-import { StringValueObject } from '../../../shared/domain/value-object/StringValueObject';
+import { InvalidArgumentError } from '../../../../shared/domain/errors/InvalidArgumentError';
+import { StringValueObject } from '../../../../shared/domain/value-object/StringValueObject';
 
 export class UserName extends StringValueObject {
   static of(value: string): UserName {

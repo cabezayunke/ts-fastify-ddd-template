@@ -1,7 +1,7 @@
+import { UserNotFound } from './error/UserNotFound';
 import { User } from './User';
-import { UserId } from './UserId';
-import { UserNotFound } from './UserNotFound';
 import { UserRepository } from './UserRepository';
+import { UserId } from './value-object/UserId';
 
 export class UserFinder {
   constructor(private readonly userRepository: UserRepository) {}
