@@ -1,6 +1,6 @@
 import { ContainerBuilder } from 'diod';
 
-import { GetUserUseCase } from '../../contexts/users/application/GetUserUseCase';
+import { GetUserUseCase } from '../../contexts/users/application/GetUserByIdQueryHandler';
 import { UserRepository } from '../../contexts/users/domain/UserRepository';
 import { MongoUserRepository } from '../../contexts/users/infrastructure/MongoUserRepository';
 

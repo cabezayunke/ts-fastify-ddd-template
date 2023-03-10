@@ -5,7 +5,7 @@ import { UserId } from './value-object/UserId';
 import { UserName } from './value-object/UserName';
 
 export interface UserParams {
-  id?: string;
+  id: string;
   name: string;
   email: string;
 }
@@ -14,13 +14,13 @@ export class User extends AggregateRoot {
   constructor(
     private readonly _name: UserName,
     private readonly _email: UserEmail,
-    private readonly _id?: UserId
+    private readonly _id: UserId
   ) {
     super();
   }
 
-  get id(): UserId | undefined {
-    return this?._id;
+  get id(): UserId {
+    return this._id;
   }
   get name(): UserName {
     return this._name;
@@ -31,7 +31,7 @@ export class User extends AggregateRoot {
 
   toPrimitives<UserParams>(): UserParams {
     return {
-      id: this._id?.value(),
+      id: this._id.value(),
       name: this.name.value(),
       email: this.email.value()
     } as UserParams;
@@ -41,7 +41,7 @@ export class User extends AggregateRoot {
     const user = new User(
       UserName.of(data.name),
       UserEmail.of(data.email),
-      data.id ? UserId.of(data.id) : undefined
+      UserId.of(data.id)
     );
 
     user.recordEvent(
