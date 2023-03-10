@@ -1,0 +1,24 @@
+version: '3.8'
+services: 
+  users-mongodb:
+    image: mongo:6.0.4
+    restart: always 
+    environment: 
+      - MONGO_INITDB_ROOT_USERNAME=usersuser
+      - MONGO_INITDB_ROOT_PASSWORD=userspassword
+    volumes: 
+      - users_data:/data/db 
+  
+  users-app:
+    build: 
+      dockerfile: Dockerfile
+    depends_on: 
+      - users-mongodb
+    volumes: 
+      - /app/node_modules
+      - ./:/app 
+    ports: 
+      - "3000:3000"
+  
+volumes: 
+  users_data: 

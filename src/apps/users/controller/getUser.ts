@@ -4,7 +4,7 @@ import { AuthenticatedRequest } from 'shared/infrastructure/controller/Authentic
 import { AuthHeadersSchema } from 'shared/infrastructure/controller/AuthHeadersSchema';
 import { ErrorResponseSchema } from 'shared/infrastructure/controller/ErrorResponseSchema';
 import { GetUserUseCase } from '../../../contexts/users/application/GetUserUseCase';
-import { container } from '../routes';
+import { container } from '../container';
 import { UserResponseSchema, UserResponseType } from './UserResponse';
 
 export const GetUserParams = {

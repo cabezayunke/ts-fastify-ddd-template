@@ -1,4 +1,4 @@
-import { User, UserParams } from '../domain/User';
+import { User } from '../domain/User';
 
 export class MongoUserRepositoryMapper {
   fromDomain(user: User): Record<string, unknown> {
@@ -10,6 +10,7 @@ export class MongoUserRepositoryMapper {
   }
 
   toDomain(data: Record<string, unknown>): User {
-    return User.of({ id: data.id } as UserParams);
+    // return User.fromPrimitives(data);
+    return User.
   }
 }

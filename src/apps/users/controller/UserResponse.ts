@@ -9,7 +9,7 @@ export const UserResponseSchema = {
     name: { type: 'string' },
     email: { type: 'string' }
   },
-  required: ['id', 'email']
+  required: ['id', 'name', 'email']
 } as const;
 
 export type UserResponseType = FromSchema<typeof UserResponseSchema>;
